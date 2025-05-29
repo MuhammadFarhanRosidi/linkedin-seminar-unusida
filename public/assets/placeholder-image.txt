@@ -1,0 +1,24 @@
+# Asset Folder
+This folder is for storing presentation assets.
+
+## Image Files Needed:
+1. speaker.jpg - Speaker profile photo (circular crop recommended)
+2. testimonial-1.jpg - First testimonial person's photo
+3. testimonial-2.jpg - Second testimonial person's photo  
+4. testimonial-3.jpg - Third testimonial person's photo
+5. testimonial-4.jpg - Fourth testimonial person's photo
+
+## Image Requirements:
+- Format: JPG, PNG, or WebP
+- Size: 400x400 pixels minimum for speaker photo
+- Size: 200x200 pixels minimum for testimonial photos
+- All images should be square (1:1 aspect ratio) for best results
+
+## How to Add Images:
+1. Place your image files in this /public/assets/ folder
+2. Update the file paths in /src/content/slides.ts
+3. Replace the placeholder paths with your actual image filenames
+
+Example:
+- Replace "/assets/speaker.jpg" with "/assets/your-photo.jpg"
+- Replace "/assets/testimonial-1.jpg" with "/assets/person1.jpg"
