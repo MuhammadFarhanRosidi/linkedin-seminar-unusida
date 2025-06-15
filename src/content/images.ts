@@ -1,30 +1,7 @@
 // Image configuration file - easily manage all image paths from here
 // You can change the base path or individual image paths as needed
 
-export interface ImageConfig {
-  basePath: string;
-  testimonials: {
-    testimonial1: string;
-    testimonial2: string;
-    testimonial3: string;
-    testimonial4: string;
-  };
-  speaker: string;
-  backgrounds: {
-    cover: string;
-    slide: string;
-  };
-  icons: {
-    linkedin: string;
-    personal: string;
-    branding: string;
-    networking: string;
-    content: string;
-    professional: string;
-    skills: string;
-    action: string;
-  };
-}
+import { ImageConfig } from "../types/ui";
 
 // Default configuration - you can easily switch between different image sets
 export const imageConfig: ImageConfig = {

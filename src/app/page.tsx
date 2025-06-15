@@ -26,7 +26,16 @@ import {
   Github,
   Eye,
   DollarSign,
+  Clock,
 } from "lucide-react";
+// import ThemeToggle from "../components/ThemeToggle";
+import {
+  StatCardProps,
+  FeatureCardProps,
+  TipBoxProps,
+  QuizAnswers,
+  ShowAnswers,
+} from "../types/ui";
 import {
   slides,
   linkedInBenefits,
@@ -49,15 +58,33 @@ import {
   attitudeInteractionContent,
   actionPlanContent,
 } from "../content/detailedContent";
+import {
+  introductionContent,
+  linkedinStatisticsContent,
+  commonMistakesContent,
+  headlineMasterclassContent,
+  photoBannerContent,
+  contentCalendarContent,
+  engagementHacksContent,
+  successStoriesContent,
+  jobSearchTipsContent,
+  recruiterInsightsContent,
+  linkedinPremiumContent,
+  networkingMasterclassContent,
+  industryInsightsContent,
+  linkedinAnalyticsContent,
+  futureTrendsContent,
+  toolsResourcesContent,
+} from "../content/newSlideContent";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(false);
-  const [quizAnswers, setQuizAnswers] = useState<{ [key: string]: number }>({});
+  const [quizAnswers, setQuizAnswers] = useState<QuizAnswers>({});
   const [currentQuizQuestion, setCurrentQuizQuestion] = useState(0);
   const [showQuizResults, setShowQuizResults] = useState(false);
   const [slideDirection, setSlideDirection] = useState(0);
-  const [showAnswer, setShowAnswer] = useState<{ [key: string]: boolean }>({});
+  const [showAnswer, setShowAnswer] = useState<ShowAnswers>({});
   const nextSlide = useCallback(() => {
     if (currentSlide < slides.length - 1) {
       setSlideDirection(1);
@@ -91,13 +118,13 @@ export default function Home() {
 
     setQuizAnswers((prev) => ({ ...prev, [questionId]: answerIndex }));
     setShowAnswer((prev) => ({ ...prev, [questionId]: true }));
-
     if (answerIndex === question.correctAnswer) {
       toast.success("Benar! " + question.explanation, {
         duration: 4000,
         style: {
           background: "#10B981",
           color: "white",
+          border: "1px solid #065F46",
         },
       });
     } else {
@@ -106,6 +133,7 @@ export default function Home() {
         style: {
           background: "#EF4444",
           color: "white",
+          border: "1px solid #7F1D1D",
         },
       });
     }
@@ -139,6 +167,7 @@ export default function Home() {
       style: {
         background: "#10B981",
         color: "white",
+        border: "1px solid #065F46",
       },
     });
   };
@@ -213,21 +242,16 @@ export default function Home() {
     },
   };
 
-  type StatCardProps = {
-    number: string;
-    label: string;
-    icon: React.ElementType;
-  };
-
   const StatCard: React.FC<StatCardProps> = ({ number, label, icon: Icon }) => (
     <motion.div
       variants={itemVariants}
       whileHover={cardHoverVariants.hover}
-      className="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600 hover:shadow-xl transition-all duration-300"
+      className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg border-t-4 border-blue-600 hover:shadow-xl transition-all duration-300"
     >
       <div className="flex items-center justify-between mb-2">
+        {" "}
         <motion.div
-          className="text-3xl font-bold text-blue-600"
+          className="text-3xl font-bold text-blue-600 dark:text-blue-400"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
@@ -239,19 +263,14 @@ export default function Home() {
           animate={{ rotate: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Icon className="w-8 h-8 text-blue-600" />
+          <Icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
         </motion.div>
       </div>
-      <p className="text-gray-600 text-sm font-medium">{label}</p>
+      <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
+        {label}
+      </p>
     </motion.div>
   );
-
-  type FeatureCardProps = {
-    title: string;
-    items: string[];
-    icon: React.ElementType;
-    color?: string;
-  };
 
   const FeatureCard: React.FC<FeatureCardProps> = ({
     title,
@@ -262,7 +281,7 @@ export default function Home() {
     <motion.div
       variants={itemVariants}
       whileHover={cardHoverVariants.hover}
-      className={`bg-gradient-to-br from-${color}-50 to-${color}-100 p-6 rounded-xl border-l-4 border-${color}-600 hover:shadow-lg transition-all duration-300`}
+      className={`bg-gradient-to-br from-${color}-50 to-${color}-100 dark:from-${color}-900/20 dark:to-${color}-800/20 p-6 rounded-xl border-l-4 border-${color}-600 hover:shadow-lg transition-all duration-300`}
     >
       {" "}
       <motion.div
@@ -272,7 +291,11 @@ export default function Home() {
         transition={{ delay: 0.2 }}
       >
         <Icon className={`w-6 h-6 text-${color}-600 mr-3`} />
-        <h3 className={`text-lg font-semibold text-${color}-800`}>{title}</h3>
+        <h3
+          className={`text-lg font-semibold text-${color}-800 dark:text-${color}-200`}
+        >
+          {title}
+        </h3>
       </motion.div>
       <motion.ul className="space-y-2">
         {items.map((item, index) => (
@@ -286,24 +309,21 @@ export default function Home() {
             <div
               className={`w-2 h-2 bg-${color}-600 rounded-full mt-2 mr-3 flex-shrink-0`}
             ></div>
-            <span className="text-gray-700 text-sm">{item}</span>
+            <span className="text-gray-700 dark:text-gray-300 text-sm">
+              {item}
+            </span>
           </motion.li>
         ))}
       </motion.ul>
     </motion.div>
   );
 
-  type TipBoxProps = {
-    title: React.ReactNode;
-    content: React.ReactNode;
-    type?: "tip" | "warning" | "info";
-  };
-
   const TipBox: React.FC<TipBoxProps> = ({ title, content, type = "tip" }) => {
     const styles = {
-      tip: "bg-gradient-to-r from-green-500 to-emerald-600 text-white",
-      warning: "bg-gradient-to-r from-amber-500 to-orange-600 text-white",
-      info: "bg-gradient-to-r from-blue-500 to-indigo-600 text-white",
+      tip: "bg-gradient-to-r from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white",
+      warning:
+        "bg-gradient-to-r from-amber-500 to-orange-600 dark:from-amber-600 dark:to-orange-700 text-white",
+      info: "bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white",
     };
 
     return (
@@ -352,16 +372,16 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
               >
                 <Linkedin className="w-12 h-12" />
-              </motion.div>
+              </motion.div>{" "}
               <div>
                 <motion.h1
-                  className="text-5xl font-bold text-gray-800 mb-2"
+                  className="text-5xl font-bold text-gray-800 dark:text-gray-100 mb-2"
                   variants={itemVariants}
                 >
                   {slide.title}
                 </motion.h1>
                 <motion.p
-                  className="text-xl text-blue-600 font-medium"
+                  className="text-xl text-blue-600 dark:text-blue-400 font-medium"
                   variants={itemVariants}
                 >
                   {slide.subtitle}
@@ -418,7 +438,6 @@ export default function Home() {
                 items={agendaContent.session2.items}
               />
             </div>
-
             <div className="grid grid-cols-1 gap-6 max-w-2xl mx-auto">
               <FeatureCard
                 title={agendaContent.session3.title}
@@ -426,10 +445,9 @@ export default function Home() {
                 color="purple"
                 items={agendaContent.session3.items}
               />
-            </div>
-
+            </div>{" "}
             <motion.div
-              className="bg-gray-200 rounded-full h-3 overflow-hidden"
+              className="bg-gray-200 dark:bg-gray-600 rounded-full h-3 overflow-hidden"
               variants={itemVariants}
             >
               <motion.div
@@ -473,7 +491,6 @@ export default function Home() {
             />
           </motion.div>
         );
-
       case "personal-branding":
         return (
           <motion.div
@@ -484,12 +501,12 @@ export default function Home() {
           >
             <motion.div
               variants={itemVariants}
-              className="bg-gradient-to-r from-purple-100 to-blue-100 p-8 rounded-xl"
+              className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 p-8 rounded-xl"
             >
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
                 {personalBrandingContent.definition.title}
               </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                 {personalBrandingContent.definition.content}
               </p>
             </motion.div>
@@ -519,11 +536,6 @@ export default function Home() {
             className="space-y-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <FeatureCard
-                title={profileOptimizationContent.profilePhoto.title}
-                icon={Users}
-                items={profileOptimizationContent.profilePhoto.items}
-              />
               <FeatureCard
                 title={profileOptimizationContent.headline.title}
                 icon={Target}
@@ -834,64 +846,70 @@ export default function Home() {
               return Target;
           }
         };
-
         const getColorClasses = (color: string) => {
           switch (color) {
             case "blue":
               return {
-                bg: "bg-gradient-to-br from-blue-50 to-blue-100",
+                bg: "bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20",
                 border: "border-blue-500",
-                text: "text-blue-600",
-                accent: "text-blue-700",
-                badge: "bg-blue-100 text-blue-800",
+                text: "text-blue-600 dark:text-blue-400",
+                accent: "text-blue-700 dark:text-blue-300",
+                badge:
+                  "bg-blue-100 text-blue-800 dark:bg-blue-800/50 dark:text-blue-200",
               };
             case "green":
               return {
-                bg: "bg-gradient-to-br from-green-50 to-green-100",
+                bg: "bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20",
                 border: "border-green-500",
-                text: "text-green-600",
-                accent: "text-green-700",
-                badge: "bg-green-100 text-green-800",
+                text: "text-green-600 dark:text-green-400",
+                accent: "text-green-700 dark:text-green-300",
+                badge:
+                  "bg-green-100 text-green-800 dark:bg-green-800/50 dark:text-green-200",
               };
             case "purple":
               return {
-                bg: "bg-gradient-to-br from-purple-50 to-purple-100",
+                bg: "bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20",
                 border: "border-purple-500",
-                text: "text-purple-600",
-                accent: "text-purple-700",
-                badge: "bg-purple-100 text-purple-800",
+                text: "text-purple-600 dark:text-purple-400",
+                accent: "text-purple-700 dark:text-purple-300",
+                badge:
+                  "bg-purple-100 text-purple-800 dark:bg-purple-800/50 dark:text-purple-200",
               };
             case "orange":
               return {
-                bg: "bg-gradient-to-br from-orange-50 to-orange-100",
+                bg: "bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20",
                 border: "border-orange-500",
-                text: "text-orange-600",
-                accent: "text-orange-700",
-                badge: "bg-orange-100 text-orange-800",
+                text: "text-orange-600 dark:text-orange-400",
+                accent: "text-orange-700 dark:text-orange-300",
+                badge:
+                  "bg-orange-100 text-orange-800 dark:bg-orange-800/50 dark:text-orange-200",
               };
             case "teal":
               return {
-                bg: "bg-gradient-to-br from-teal-50 to-teal-100",
+                bg: "bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20",
                 border: "border-teal-500",
-                text: "text-teal-600",
-                accent: "text-teal-700",
-                badge: "bg-teal-100 text-teal-800",
+                text: "text-teal-600 dark:text-teal-400",
+                accent: "text-teal-700 dark:text-teal-300",
+                badge:
+                  "bg-teal-100 text-teal-800 dark:bg-teal-800/50 dark:text-teal-200",
               };
             case "emerald":
               return {
-                bg: "bg-gradient-to-br from-emerald-50 to-emerald-100",
+                bg: "bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20",
                 border: "border-emerald-500",
-                text: "text-emerald-600",
-                accent: "text-emerald-700",
-                badge: "bg-emerald-100 text-emerald-800",
+                text: "text-emerald-600 dark:text-emerald-400",
+                accent: "text-emerald-700 dark:text-emerald-300",
+                badge:
+                  "bg-emerald-100 text-emerald-800 dark:bg-emerald-800/50 dark:text-emerald-200",
               };
             default:
               return {
-                bg: "bg-gradient-to-br from-gray-50 to-gray-100",
+                bg: "bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/20 dark:to-gray-800/20",
                 border: "border-gray-500",
-                text: "text-gray-600",
-                accent: "text-gray-700",
-                badge: "bg-gray-100 text-gray-800",
+                text: "text-gray-600 dark:text-gray-400",
+                accent: "text-gray-700 dark:text-gray-300",
+                badge:
+                  "bg-gray-100 text-gray-800 dark:bg-gray-800/50 dark:text-gray-200",
               };
           }
         };
@@ -903,8 +921,9 @@ export default function Home() {
             animate="visible"
             className="space-y-8"
           >
+            {" "}
             <motion.div variants={itemVariants} className="text-center mb-8">
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                 LinkedIn bukan hanya platform sosial untuk profesional, tetapi
                 alat strategis yang dapat mengakselerasi karir Anda dengan cara
                 yang signifikan.
@@ -927,8 +946,9 @@ export default function Home() {
                     }}
                   >
                     <div className="flex items-center justify-between mb-4">
+                      {" "}
                       <motion.div
-                        className={`${colors.text} p-3 rounded-lg bg-white shadow-sm`}
+                        className={`${colors.text} p-3 rounded-lg bg-white dark:bg-gray-800 shadow-sm border dark:border-gray-700`}
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6 }}
                       >
@@ -947,7 +967,6 @@ export default function Home() {
                         {benefit.percentage}
                       </motion.div>
                     </div>
-
                     <motion.h3
                       className={`text-lg font-bold ${colors.accent} mb-2`}
                       initial={{ opacity: 0, y: 10 }}
@@ -955,17 +974,15 @@ export default function Home() {
                       transition={{ delay: 0.4 + index * 0.1 }}
                     >
                       {benefit.title}
-                    </motion.h3>
-
+                    </motion.h3>{" "}
                     <motion.p
-                      className="text-gray-700 text-sm mb-3 leading-relaxed"
+                      className="text-gray-700 dark:text-gray-300 text-sm mb-3 leading-relaxed"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
                     >
                       {benefit.description}
                     </motion.p>
-
                     <motion.div
                       className={`${colors.badge} px-3 py-1 rounded-full text-xs font-medium inline-block`}
                       initial={{ opacity: 0, x: -20 }}
@@ -978,7 +995,7 @@ export default function Home() {
                 );
               })}
             </div>
-            <motion.div
+            {/* <motion.div
               variants={itemVariants}
               className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 rounded-xl text-center"
             >
@@ -1000,7 +1017,7 @@ export default function Home() {
                 yang sama seperti statistik di atas. Saatnya berinvestasi pada
                 masa depan karir Anda!
               </motion.p>
-            </motion.div>{" "}
+            </motion.div>{" "} */}
           </motion.div>
         );
 
@@ -1012,13 +1029,13 @@ export default function Home() {
             animate="visible"
             className="space-y-8"
           >
-            {/* Introduction Section */}
+            {/* Introduction Section */}{" "}
             <motion.div
               variants={itemVariants}
-              className="bg-gradient-to-r from-green-100 to-blue-100 p-8 rounded-xl text-center"
+              className="bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900/30 dark:to-blue-900/30 p-8 rounded-xl text-center"
             >
               <motion.h2
-                className="text-2xl font-bold text-gray-800 mb-4"
+                className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -1026,7 +1043,7 @@ export default function Home() {
                 🎓 Fresh Graduate? Ini Battle Plan LinkedIn-mu!
               </motion.h2>
               <motion.p
-                className="text-lg text-gray-700"
+                className="text-lg text-gray-700 dark:text-gray-300"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -1035,7 +1052,6 @@ export default function Home() {
                 strategi ada di sini!
               </motion.p>
             </motion.div>
-
             {/* Main Content Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <FeatureCard
@@ -1051,7 +1067,6 @@ export default function Home() {
                 color="green"
               />
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <FeatureCard
                 title={freshgraduateStrategyContent.applicationTips.title}
@@ -1068,7 +1083,6 @@ export default function Home() {
                 color="orange"
               />
             </div>
-
             {/* Warning Section */}
             <TipBox
               title={freshgraduateStrategyContent.commonMistakes.title}
@@ -1085,14 +1099,13 @@ export default function Home() {
               }
               type="warning"
             />
-
-            {/* Success Metrics Section */}
-            <motion.div
+            {/* Success Metrics Section */}{" "}
+            {/* <motion.div
               variants={itemVariants}
-              className="bg-gradient-to-r from-emerald-50 to-teal-50 p-8 rounded-xl border-l-4 border-emerald-500"
+              className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 p-8 rounded-xl border-l-4 border-emerald-500"
             >
               <motion.h3
-                className="text-xl font-bold text-emerald-700 mb-4 flex items-center"
+                className="text-xl font-bold text-emerald-700 dark:text-emerald-300 mb-4 flex items-center"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
@@ -1111,15 +1124,16 @@ export default function Home() {
                       transition={{ delay: 0.3 + index * 0.1 }}
                     >
                       <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-700 text-sm">{metric}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-sm">
+                        {metric}
+                      </span>
                     </motion.div>
                   )
                 )}
               </div>
-            </motion.div>
-
+            </motion.div> */}
             {/* Call to Action */}
-            <motion.div
+            {/* <motion.div
               variants={itemVariants}
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl text-center"
             >
@@ -1140,7 +1154,7 @@ export default function Home() {
                 Implementasikan strategi ini konsisten selama 3 bulan - dijamin
                 profil LinkedIn-mu akan noticed oleh recruiter!
               </motion.p>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         );
 
@@ -1155,20 +1169,21 @@ export default function Home() {
           >
             {!showQuizResults ? (
               <>
+                {" "}
                 <motion.div
                   variants={itemVariants}
-                  className="bg-gradient-to-r from-purple-100 to-blue-100 p-8 rounded-xl"
+                  className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 p-8 rounded-xl"
                 >
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-gray-800">
+                    <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
                       Pertanyaan {currentQuizQuestion + 1} dari{" "}
                       {quizQuestions.length}
-                    </h2>
-                    <div className="bg-blue-600 text-white px-4 py-2 rounded-full">
+                    </h2>{" "}
+                    <div className="bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-full shadow-sm">
                       Quiz LinkedIn
                     </div>
                   </div>
-                  <p className="text-lg text-gray-700 mb-8">
+                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
                     {currentQuestion.question}
                   </p>{" "}
                   <div className="grid grid-cols-1 gap-4">
@@ -1177,25 +1192,24 @@ export default function Home() {
                         quizAnswers[currentQuestion.id] === index;
                       const isCorrect = index === currentQuestion.correctAnswer;
                       const hasAnswered = showAnswer[currentQuestion.id];
-
                       let buttonClass =
                         "p-4 text-left rounded-lg border-2 transition-all";
 
                       if (hasAnswered) {
                         if (isCorrect) {
                           buttonClass +=
-                            " border-green-500 bg-green-50 text-green-800";
+                            " border-green-500 bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-300";
                         } else if (isSelected) {
                           buttonClass +=
-                            " border-red-500 bg-red-50 text-red-800";
+                            " border-red-500 bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-300";
                         } else {
                           buttonClass +=
-                            " border-gray-200 bg-gray-50 text-gray-500";
+                            " border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400";
                         }
                       } else {
                         buttonClass += isSelected
-                          ? " border-blue-500 bg-blue-50"
-                          : " border-gray-200 hover:bg-blue-50";
+                          ? " border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-gray-800 dark:text-blue-200"
+                          : " border-gray-200 dark:border-gray-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300";
                       }
 
                       return (
@@ -1211,23 +1225,24 @@ export default function Home() {
                           whileTap={!hasAnswered ? { scale: 0.98 } : {}}
                           variants={itemVariants}
                         >
+                          {" "}
                           <span
                             className={`font-medium mr-3 ${
                               hasAnswered && isCorrect
-                                ? "text-green-600"
+                                ? "text-green-600 dark:text-green-400"
                                 : hasAnswered && isSelected
-                                ? "text-red-600"
-                                : "text-blue-600"
+                                ? "text-red-600 dark:text-red-400"
+                                : "text-blue-600 dark:text-blue-400"
                             }`}
                           >
                             {String.fromCharCode(65 + index)}.
                           </span>
-                          {option}
+                          {option}{" "}
                           {hasAnswered && isCorrect && (
-                            <CheckCircle className="w-5 h-5 text-green-600 ml-auto inline" />
+                            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 ml-auto inline" />
                           )}
                           {hasAnswered && isSelected && !isCorrect && (
-                            <XCircle className="w-5 h-5 text-red-600 ml-auto inline" />
+                            <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 ml-auto inline" />
                           )}
                         </motion.button>
                       );
@@ -1238,15 +1253,15 @@ export default function Home() {
             ) : (
               <motion.div
                 variants={itemVariants}
-                className="bg-gradient-to-r from-green-100 to-blue-100 p-8 rounded-xl text-center"
+                className="bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900/30 dark:to-blue-900/30 p-8 rounded-xl text-center"
               >
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6">
                   Hasil Quiz
-                </h2>
-                <div className="text-6xl font-bold text-green-600 mb-4">
+                </h2>{" "}
+                <div className="text-6xl font-bold text-green-600 dark:text-green-400 mb-4">
                   {getQuizScore().correct}/{getQuizScore().total}
                 </div>
-                <p className="text-xl text-gray-700 mb-6">
+                <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
                   Skor Anda:{" "}
                   {Math.round(
                     (getQuizScore().correct / getQuizScore().total) * 100
@@ -1255,9 +1270,9 @@ export default function Home() {
                 </p>{" "}
                 <div className="flex justify-center space-x-2 mb-6">
                   {getQuizScore().correct >= 4 ? (
-                    <CheckCircle className="w-8 h-8 text-green-600" />
+                    <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
                   ) : (
-                    <XCircle className="w-8 h-8 text-red-600" />
+                    <XCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
                   )}
                   <span className="text-lg font-medium">
                     {getQuizScore().correct >= 4
@@ -1265,10 +1280,10 @@ export default function Home() {
                       : "Perlu Dipelajari Lagi"}
                   </span>
                 </div>
-                {/* Retake Quiz Button */}
+                {/* Retake Quiz Button */}{" "}
                 <motion.button
                   onClick={retakeQuiz}
-                  className="mt-4 px-6 py-3 rounded-full bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 transition-all"
+                  className="mt-4 px-6 py-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-semibold shadow-md hover:bg-blue-700 dark:hover:bg-blue-600 hover:shadow-lg transition-all duration-200"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -1286,10 +1301,10 @@ export default function Home() {
             animate="visible"
             className="text-center space-y-8"
           >
-            {/* Speaker Profile Section */}
+            {/* Speaker Profile Section */}{" "}
             <motion.div
               variants={itemVariants}
-              className="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-xl max-w-3xl mx-auto"
+              className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 p-8 rounded-xl max-w-3xl mx-auto"
             >
               <motion.div
                 className="flex flex-col md:flex-row items-center gap-8"
@@ -1300,7 +1315,8 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-200">
+                  {" "}
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-200 dark:border-blue-700">
                     <Image
                       src={speakerInfo.image || "/assets/speaker.jpg"}
                       alt={speakerInfo.name}
@@ -1310,7 +1326,7 @@ export default function Home() {
                     />
                   </div>
                   <motion.div
-                    className="absolute -bottom-2 -right-2 bg-blue-600 text-white p-2 rounded-full"
+                    className="absolute -bottom-2 -right-2 bg-blue-600 dark:bg-blue-500 text-white p-2 rounded-full shadow-lg"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.5 }}
@@ -1320,47 +1336,48 @@ export default function Home() {
                 </motion.div>
 
                 <div className="text-center md:text-left">
+                  {" "}
                   <motion.h2
-                    className="text-3xl font-bold text-gray-800 mb-2"
+                    className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2"
                     variants={itemVariants}
                   >
                     {speakerInfo.name}
                   </motion.h2>
                   <motion.p
-                    className="text-lg text-blue-600 font-medium mb-1"
+                    className="text-lg text-blue-600 dark:text-blue-400 font-medium mb-1"
                     variants={itemVariants}
                   >
                     {speakerInfo.title}
                   </motion.p>
-                  <motion.p className="text-gray-600" variants={itemVariants}>
+                  <motion.p
+                    className="text-gray-600 dark:text-gray-400"
+                    variants={itemVariants}
+                  >
                     {speakerInfo.company}
                   </motion.p>
                 </div>
               </motion.div>
-            </motion.div>
-
+            </motion.div>{" "}
             <motion.h1
-              className="text-4xl md:text-5xl font-bold text-gray-800 mb-4"
+              className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4"
               variants={itemVariants}
             >
               Terima Kasih!
             </motion.h1>
-
             <motion.p
-              className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
+              className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto"
               variants={itemVariants}
             >
               Semoga pelatihan LinkedIn ini bermanfaat untuk mengembangkan karir
               dan personal branding Anda. Tetap konsisten dan praktikkan tips
               yang telah dipelajari!
-            </motion.p>
-
+            </motion.p>{" "}
             {/* Social Media Links */}
             <motion.div
-              className="bg-gradient-to-r from-blue-100 to-indigo-100 p-8 rounded-xl max-w-2xl mx-auto"
+              className="bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 p-8 rounded-xl max-w-2xl mx-auto"
               variants={itemVariants}
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
                 Stay Connected
               </h3>
               <div className="flex flex-wrap justify-center gap-4">
@@ -1415,23 +1432,884 @@ export default function Home() {
                   </motion.a>
                 )}
               </div>
-            </motion.div>
-
+            </motion.div>{" "}
             {/* Action Item */}
             <motion.div
-              className="bg-yellow-50 border border-yellow-200 p-6 rounded-xl max-w-2xl mx-auto"
+              className="bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700/50 p-6 rounded-xl max-w-2xl mx-auto"
               variants={itemVariants}
             >
-              <h3 className="text-lg font-bold text-yellow-800 mb-2 flex items-center justify-center gap-2">
+              <h3 className="text-lg font-bold text-yellow-800 dark:text-yellow-300 mb-2 flex items-center justify-center gap-2">
                 <Target className="w-5 h-5" />
                 Next Action Steps
               </h3>
-              <p className="text-yellow-700">
-                Terapkan minimal 3 tips dari pelatihan ini dalam 1 minggu ke
-                depan dan bagikan hasilnya di LinkedIn dengan hashtag
-                #LinkedInTraining
+              <p className="text-yellow-700 dark:text-yellow-400">
+                Terapkan tips dari pelatihan ini ya.... 😊 <br /> Semangat... 💪
               </p>
             </motion.div>
+          </motion.div>
+        );
+      case "introduction":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                LinkedIn & Personal Branding
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                Memahami kekuatan LinkedIn untuk transformasi karir profesional
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={introductionContent.statistics.title}
+                icon={BarChart3}
+                items={introductionContent.statistics.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={introductionContent.importance.title}
+                icon={TrendingUp}
+                items={introductionContent.importance.items}
+                color="green"
+              />
+            </div>
+
+            <TipBox
+              title="🎯 Peluang Emas 2025"
+              content={introductionContent.opportunity.content}
+              type="info"
+            />
+          </motion.div>
+        );
+      case "linkedin-statistics":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Statistik LinkedIn yang Mengejutkan
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Data dan fakta yang akan mengubah cara pandang Anda tentang
+                LinkedIn
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <FeatureCard
+                title={linkedinStatisticsContent.globalStats.title}
+                icon={Users}
+                items={linkedinStatisticsContent.globalStats.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={linkedinStatisticsContent.indonesiaStats.title}
+                icon={Target}
+                items={linkedinStatisticsContent.indonesiaStats.items}
+                color="green"
+              />
+              <FeatureCard
+                title={linkedinStatisticsContent.impactStats.title}
+                icon={TrendingUp}
+                items={linkedinStatisticsContent.impactStats.items}
+                color="purple"
+              />
+            </div>
+          </motion.div>
+        );
+      case "common-mistakes":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Kesalahan Fatal yang Harus Dihindari
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Hindari kesalahan ini untuk memaksimalkan potensi LinkedIn Anda
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <FeatureCard
+                title={commonMistakesContent.profileMistakes.title}
+                icon={XCircle}
+                items={commonMistakesContent.profileMistakes.items}
+                color="red"
+              />
+              <FeatureCard
+                title={commonMistakesContent.contentMistakes.title}
+                icon={XCircle}
+                items={commonMistakesContent.contentMistakes.items}
+                color="red"
+              />
+              <FeatureCard
+                title={commonMistakesContent.networkingMistakes.title}
+                icon={XCircle}
+                items={commonMistakesContent.networkingMistakes.items}
+                color="red"
+              />
+            </div>
+
+            <TipBox
+              title="⚠️ Warning!"
+              content={commonMistakesContent.consequencesWarning.content}
+              type="warning"
+            />
+          </motion.div>
+        );
+      case "headline-masterclass":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Masterclass LinkedIn Headline
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Buat headline yang menarik perhatian recruiter dalam hitungan
+                detik
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <FeatureCard
+                  title={headlineMasterclassContent.badExamples.title}
+                  icon={XCircle}
+                  items={headlineMasterclassContent.badExamples.items}
+                  color="red"
+                />
+              </div>
+              <div className="space-y-6">
+                <FeatureCard
+                  title={headlineMasterclassContent.goodExamples.title}
+                  icon={CheckCircle}
+                  items={headlineMasterclassContent.goodExamples.items}
+                  color="green"
+                />
+              </div>
+            </div>
+
+            <TipBox
+              title="🎯 Formula Headline Sempurna"
+              content={headlineMasterclassContent.headlineFormula.content}
+              type="tip"
+            />
+
+            <FeatureCard
+              title={headlineMasterclassContent.tips.title}
+              icon={Brain}
+              items={headlineMasterclassContent.tips.items}
+              color="blue"
+            />
+          </motion.div>
+        );
+      case "photo-banner-tips":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Optimasi Foto & Banner LinkedIn
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                First impression matters - buat visual yang profesional dan
+                menarik
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={photoBannerContent.profilePhotoTips.title}
+                icon={Eye}
+                items={photoBannerContent.profilePhotoTips.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={photoBannerContent.bannerDesign.title}
+                icon={Eye}
+                items={photoBannerContent.bannerDesign.items}
+                color="purple"
+              />
+            </div>
+
+            <FeatureCard
+              title={photoBannerContent.commonPhotoMistakes.title}
+              icon={XCircle}
+              items={photoBannerContent.commonPhotoMistakes.items}
+              color="red"
+            />
+
+            <TipBox
+              title="🧠 Psikologi Visual"
+              content={photoBannerContent.psychologyTips.content}
+              type="tip"
+            />
+          </motion.div>
+        );
+      case "content-calendar":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Content Calendar LinkedIn
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Strategi posting yang konsisten untuk membangun authority
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={contentCalendarContent.weeklyPlan.title}
+                icon={Calendar}
+                items={contentCalendarContent.weeklyPlan.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={contentCalendarContent.contentTypes.title}
+                icon={BookOpen}
+                items={contentCalendarContent.contentTypes.items}
+                color="green"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={contentCalendarContent.postingTimes.title}
+                icon={Clock}
+                items={contentCalendarContent.postingTimes.items}
+                color="purple"
+              />
+              <FeatureCard
+                title={contentCalendarContent.contentIdeas.title}
+                icon={Brain}
+                items={contentCalendarContent.contentIdeas.items.slice(0, 6)}
+                color="orange"
+              />
+            </div>
+          </motion.div>
+        );
+      case "engagement-hacks":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Rahasia Engagement LinkedIn
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Hack algoritma LinkedIn untuk maksimal visibility
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={engagementHacksContent.algorithmSecrets.title}
+                icon={Zap}
+                items={engagementHacksContent.algorithmSecrets.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={engagementHacksContent.engagementTactics.title}
+                icon={TrendingUp}
+                items={engagementHacksContent.engagementTactics.items}
+                color="green"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={engagementHacksContent.commentStrategy.title}
+                icon={MessageCircle}
+                items={engagementHacksContent.commentStrategy.items}
+                color="purple"
+              />
+              <FeatureCard
+                title={engagementHacksContent.networkingHacks.title}
+                icon={Users}
+                items={engagementHacksContent.networkingHacks.items}
+                color="orange"
+              />
+            </div>
+          </motion.div>
+        );
+
+      case "success-stories":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Success Stories LinkedIn Indonesia
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Inspirasi dari mereka yang berhasil memanfaatkan LinkedIn
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {successStoriesContent.stories.slice(0, 4).map((story, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-6 rounded-xl border-l-4 border-green-500"
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="bg-green-100 dark:bg-green-800/50 p-2 rounded-full mr-3">
+                      <Award className="w-6 h-6 text-green-600 dark:text-green-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-green-700 dark:text-green-300">
+                        {story.name}
+                      </h3>
+                      <p className="text-sm text-green-600 dark:text-green-400">
+                        {story.position}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300 mb-3">
+                    {story.strategy}
+                  </p>
+                  <div className="bg-white dark:bg-gray-800 p-3 rounded-lg">
+                    <p className="text-sm font-medium text-green-700 dark:text-green-300">
+                      Key: {story.keyTakeaway}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        );
+
+      case "job-search-tips":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Job Search Strategy di LinkedIn
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Strategi efektif untuk mendapatkan pekerjaan impian
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={jobSearchTipsContent.searchStrategy.title}
+                icon={Target}
+                items={jobSearchTipsContent.searchStrategy.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={jobSearchTipsContent.applicationTips.title}
+                icon={CheckCircle}
+                items={jobSearchTipsContent.applicationTips.items}
+                color="green"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={jobSearchTipsContent.salaryNegotiation.title}
+                icon={DollarSign}
+                items={jobSearchTipsContent.salaryNegotiation.items}
+                color="purple"
+              />
+              <FeatureCard
+                title={jobSearchTipsContent.redFlags.title}
+                icon={XCircle}
+                items={jobSearchTipsContent.redFlags.items}
+                color="red"
+              />
+            </div>
+          </motion.div>
+        );
+      case "recruiter-insights":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Wawasan dari Recruiter Top Indonesia
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Apa yang mereka cari di LinkedIn profile Anda
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <FeatureCard
+                title={recruiterInsightsContent.whatRecruitersLookFor.title}
+                icon={Target}
+                items={recruiterInsightsContent.whatRecruitersLookFor.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={recruiterInsightsContent.screeningProcess.title}
+                icon={CheckCircle}
+                items={recruiterInsightsContent.screeningProcess.items}
+                color="green"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <FeatureCard
+                title={recruiterInsightsContent.standOutTips.title}
+                icon={Award}
+                items={recruiterInsightsContent.standOutTips.items}
+                color="purple"
+              />
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                💬 Kata Para Recruiter
+              </h3>
+              <div className="space-y-4">
+                {recruiterInsightsContent.recruiterQuotes.map(
+                  (quote, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg"
+                    >
+                      {" "}
+                      <p className="text-gray-700 dark:text-gray-300 italic mb-2">
+                        &ldquo;{quote.quote}&rdquo;
+                      </p>
+                      <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                        - {quote.recruiter}
+                      </p>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          </motion.div>
+        );
+
+      case "linkedin-premium":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                LinkedIn Premium: Worth It or Not?
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Analisis mendalam fitur premium vs free
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <FeatureCard
+                title={linkedinPremiumContent.freeVsPremium.title}
+                icon={BarChart3}
+                items={linkedinPremiumContent.freeVsPremium.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={linkedinPremiumContent.worthItScenarios.title}
+                icon={CheckCircle}
+                items={linkedinPremiumContent.worthItScenarios.items}
+                color="green"
+              />
+              <FeatureCard
+                title={linkedinPremiumContent.premiumTips.title}
+                icon={Zap}
+                items={linkedinPremiumContent.premiumTips.items}
+                color="purple"
+              />
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+              <FeatureCard
+                title={linkedinPremiumContent.alternatives.title}
+                icon={Heart}
+                items={linkedinPremiumContent.alternatives.items}
+                color="orange"
+              />
+            </div>
+          </motion.div>
+        );
+
+      case "networking-masterclass":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Masterclass Networking di LinkedIn
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Membangun koneksi yang bermakna dan strategis
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <FeatureCard
+                title={networkingMasterclassContent.networkingStrategy.title}
+                icon={Users}
+                items={networkingMasterclassContent.networkingStrategy.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={networkingMasterclassContent.connectionMessage.title}
+                icon={MessageCircle}
+                items={networkingMasterclassContent.connectionMessage.items}
+                color="green"
+              />
+              <FeatureCard
+                title={networkingMasterclassContent.followUpStrategy.title}
+                icon={Heart}
+                items={networkingMasterclassContent.followUpStrategy.items}
+                color="purple"
+              />
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+              <FeatureCard
+                title={networkingMasterclassContent.networkingEvents.title}
+                icon={Calendar}
+                items={networkingMasterclassContent.networkingEvents.items}
+                color="orange"
+              />
+            </div>
+          </motion.div>
+        );
+
+      case "industry-insights":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Strategi LinkedIn per Industri
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Pendekatan khusus untuk berbagai sektor industri
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={industryInsightsContent.techIndustry.title}
+                icon={Zap}
+                items={industryInsightsContent.techIndustry.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={industryInsightsContent.financeIndustry.title}
+                icon={DollarSign}
+                items={industryInsightsContent.financeIndustry.items}
+                color="green"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={industryInsightsContent.marketingIndustry.title}
+                icon={TrendingUp}
+                items={industryInsightsContent.marketingIndustry.items}
+                color="purple"
+              />
+              <FeatureCard
+                title={industryInsightsContent.consultingIndustry.title}
+                icon={Brain}
+                items={industryInsightsContent.consultingIndustry.items}
+                color="orange"
+              />
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+              <FeatureCard
+                title={industryInsightsContent.startupEcosystem.title}
+                icon={Briefcase}
+                items={industryInsightsContent.startupEcosystem.items}
+                color="red"
+              />
+            </div>
+          </motion.div>
+        );
+
+      case "linkedin-analytics":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Memahami LinkedIn Analytics
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Mengukur dan mengoptimalkan performa profil Anda
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <FeatureCard
+                title={linkedinAnalyticsContent.profileAnalytics.title}
+                icon={BarChart3}
+                items={linkedinAnalyticsContent.profileAnalytics.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={linkedinAnalyticsContent.contentAnalytics.title}
+                icon={TrendingUp}
+                items={linkedinAnalyticsContent.contentAnalytics.items}
+                color="green"
+              />
+              <FeatureCard
+                title={linkedinAnalyticsContent.optimizationTips.title}
+                icon={Target}
+                items={linkedinAnalyticsContent.optimizationTips.items}
+                color="purple"
+              />
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+              <FeatureCard
+                title={linkedinAnalyticsContent.toolsRecommendation.title}
+                icon={Zap}
+                items={linkedinAnalyticsContent.toolsRecommendation.items}
+                color="orange"
+              />
+            </div>
+          </motion.div>
+        );
+
+      case "future-trends":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Tren Masa Depan LinkedIn 2025-2030
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Persiapkan diri untuk evolusi dunia kerja
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={futureTrendsContent.platformEvolution.title}
+                icon={Zap}
+                items={futureTrendsContent.platformEvolution.items}
+                color="blue"
+              />
+              <FeatureCard
+                title={futureTrendsContent.workTrends.title}
+                icon={TrendingUp}
+                items={futureTrendsContent.workTrends.items}
+                color="green"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={futureTrendsContent.preparationTips.title}
+                icon={Target}
+                items={futureTrendsContent.preparationTips.items}
+                color="purple"
+              />
+              <FeatureCard
+                title={futureTrendsContent.skillsPrediction.title}
+                icon={Brain}
+                items={futureTrendsContent.skillsPrediction.items}
+                color="orange"
+              />
+            </div>
+          </motion.div>
+        );
+
+      case "tools-resources":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Tools & Resources LinkedIn
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Alat bantu untuk memaksimalkan LinkedIn Anda
+              </p>
+            </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={toolsResourcesContent.freeTools.title}
+                icon={Heart}
+                items={toolsResourcesContent.freeTools.items}
+                color="green"
+              />
+              <FeatureCard
+                title={toolsResourcesContent.premiumTools.title}
+                icon={Zap}
+                items={toolsResourcesContent.premiumTools.items}
+                color="blue"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FeatureCard
+                title={toolsResourcesContent.learningResources.title}
+                icon={BookOpen}
+                items={toolsResourcesContent.learningResources.items}
+                color="purple"
+              />
+              <FeatureCard
+                title={toolsResourcesContent.networkingResources.title}
+                icon={Users}
+                items={toolsResourcesContent.networkingResources.items}
+                color="orange"
+              />
+            </div>{" "}
+          </motion.div>
+        );
+
+      case "thank-you":
+        return (
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-center space-y-8"
+          >
+            <motion.div variants={itemVariants}>
+              <h2 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Terima Kasih! 🙏
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
+                Semoga workshop ini bermanfaat untuk perjalanan karir Anda
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border dark:border-gray-700 max-w-2xl mx-auto"
+            >
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                {speakerInfo.name}
+              </h3>
+              <p className="text-lg text-blue-600 dark:text-blue-400 mb-6">
+                {speakerInfo.title} • {speakerInfo.company}
+              </p>
+
+              <div className="flex justify-center space-x-6">
+                {speakerInfo.socialMedia.linkedin && (
+                  <motion.a
+                    href={speakerInfo.socialMedia.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Linkedin className="w-6 h-6" />
+                    <span>LinkedIn</span>
+                  </motion.a>
+                )}
+                {speakerInfo.socialMedia.youtube && (
+                  <motion.a
+                    href={speakerInfo.socialMedia.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Youtube className="w-6 h-6" />
+                    <span>YouTube</span>
+                  </motion.a>
+                )}
+                {speakerInfo.socialMedia.github && (
+                  <motion.a
+                    href={speakerInfo.socialMedia.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Github className="w-6 h-6" />
+                    <span>GitHub</span>
+                  </motion.a>
+                )}
+              </div>
+            </motion.div>
+
+            <TipBox
+              title="🚀 Langkah Selanjutnya"
+              content="Mulai optimasi LinkedIn Anda hari ini juga! Implementasikan tips yang telah dipelajari dan jangan lupa untuk terus update profil secara berkala."
+              type="tip"
+            />
           </motion.div>
         );
 
@@ -1439,38 +2317,37 @@ export default function Home() {
         return <div>Slide content not found</div>;
     }
   };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header */}
       <motion.div
-        className="bg-white/10 backdrop-blur-sm border-b border-white/20"
+        className="bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm border-b border-white/20 dark:border-gray-700/50"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          {" "}
           <div className="flex items-center space-x-4">
             <motion.div
-              className="bg-white p-2 rounded-lg"
+              className="bg-white dark:bg-gray-800 p-2 rounded-lg border dark:border-gray-700"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
             >
-              <Linkedin className="w-6 h-6 text-blue-600" />
-            </motion.div>
+              <Linkedin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </motion.div>{" "}
             <div>
               <h1 className="text-white font-bold text-lg">
-                LinkedIn Training
+                Pelatihan LinkedIn
               </h1>
-              <p className="text-blue-200 text-sm">
-                Professional Development Program
+              <p className="text-blue-200 dark:text-gray-400 text-sm">
+                Program Pengembangan Profesional
               </p>
             </div>
-          </div>
-
+          </div>{" "}
           <div className="flex items-center space-x-4">
             <motion.div
-              className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white font-medium"
+              className="bg-white/20 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full text-white dark:text-gray-200 font-medium border border-white/10 dark:border-gray-600/50"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.5 }}
@@ -1478,12 +2355,20 @@ export default function Home() {
               {currentSlide + 1} / {slides.length}
             </motion.div>
 
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              {/* <ThemeToggle /> */}
+            </motion.div>
+
             <motion.button
               onClick={() => setIsAutoPlay(!isAutoPlay)}
-              className={`px-4 py-2 rounded-full font-medium transition-all ${
+              className={`px-4 py-2 rounded-full font-medium transition-all border ${
                 isAutoPlay
-                  ? "bg-green-500 text-white"
-                  : "bg-white/20 text-white hover:bg-white/30"
+                  ? "bg-green-500 dark:bg-green-600 text-white border-green-400 dark:border-green-500"
+                  : "bg-white/20 dark:bg-gray-800/80 text-white dark:text-gray-200 hover:bg-white/30 dark:hover:bg-gray-700/80 border-white/20 dark:border-gray-600/50"
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -1491,12 +2376,11 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
             >
-              {isAutoPlay ? "Auto ON" : "Auto OFF"}
+              {isAutoPlay ? "Otomatis HIDUP" : "Otomatis MATI"}
             </motion.button>
           </div>
         </div>
-      </motion.div>
-
+      </motion.div>{" "}
       {/* Slide Navigation Dots */}
       <motion.div
         className="fixed top-1/2 left-4 transform -translate-y-1/2 z-20"
@@ -1504,30 +2388,31 @@ export default function Home() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
-        <div className="flex flex-col space-y-2">
-          {slides.map((_, index) => (
-            <motion.button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentSlide
-                  ? "bg-white scale-125"
-                  : "bg-white/40 hover:bg-white/60"
-              }`}
-              title={`Go to slide ${index + 1}`}
-              whileHover={{ scale: 1.5 }}
-              whileTap={{ scale: 0.9 }}
-              initial={{ scale: 0 }}
-              animate={{ scale: index === currentSlide ? 1.25 : 1 }}
-              transition={{ delay: 1.2 + index * 0.05 }}
-            />
-          ))}
+        <div className="bg-black/20 dark:bg-white/10 backdrop-blur-sm rounded-full p-3">
+          <div className="flex flex-col space-y-3">
+            {slides.map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all border-2 ${
+                  index === currentSlide
+                    ? "bg-white dark:bg-blue-400 border-white dark:border-blue-400 scale-125 shadow-lg"
+                    : "bg-white/40 dark:bg-gray-600 border-white/60 dark:border-gray-500 hover:bg-white/70 dark:hover:bg-gray-400"
+                }`}
+                title={`Pergi ke slide ${index + 1}`}
+                whileHover={{ scale: 1.5 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ scale: 0 }}
+                animate={{ scale: index === currentSlide ? 1.25 : 1 }}
+                transition={{ delay: 1.2 + index * 0.05 }}
+              />
+            ))}
+          </div>
         </div>
       </motion.div>
-
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="bg-white rounded-2xl shadow-2xl min-h-[600px] overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl min-h-[600px] overflow-hidden">
           <AnimatePresence mode="wait" custom={slideDirection}>
             <motion.div
               key={currentSlide}
@@ -1550,12 +2435,13 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                {" "}
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                   {slides[currentSlide].headTitle || slides[currentSlide].title}
                 </h1>
                 {(slides[currentSlide].subHeadTitle ||
                   slides[currentSlide].subtitle) && (
-                  <p className="text-xl text-blue-600 font-medium">
+                  <p className="text-xl text-blue-600 dark:text-blue-400 font-medium">
                     {slides[currentSlide].subHeadTitle ||
                       slides[currentSlide].subtitle}
                   </p>
@@ -1566,7 +2452,6 @@ export default function Home() {
           </AnimatePresence>
         </div>
       </div>
-
       {/* Navigation Controls */}
       <motion.div
         className="fixed bottom-6 right-6 flex space-x-3 z-20"
@@ -1574,52 +2459,68 @@ export default function Home() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
       >
+        {" "}
         <motion.button
           onClick={prevSlide}
           disabled={currentSlide === 0}
-          className="bg-white text-blue-600 p-3 rounded-full shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Previous Slide"
+          className="bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 p-3 rounded-full shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Slide Sebelumnya"
           whileHover={{ scale: 1.1, y: -5 }}
           whileTap={{ scale: 0.9 }}
         >
           <ChevronLeft className="w-6 h-6" />
         </motion.button>
-
         <motion.button
           onClick={nextSlide}
           disabled={currentSlide === slides.length - 1}
-          className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Next Slide"
+          className="bg-blue-600 dark:bg-blue-500 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Slide Selanjutnya"
           whileHover={{ scale: 1.1, y: -5 }}
           whileTap={{ scale: 0.9 }}
         >
           <ChevronRight className="w-6 h-6" />
         </motion.button>
-      </motion.div>
-
+      </motion.div>{" "}
       {/* Progress Bar */}
       <motion.div
-        className="fixed bottom-0 left-0 right-0 h-1 bg-white/20"
+        className="fixed bottom-0 left-0 right-0 h-1 bg-white/20 dark:bg-gray-800/50"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 2, duration: 1 }}
       >
         <motion.div
-          className="h-full bg-gradient-to-r from-blue-400 to-indigo-500"
+          className="h-full bg-gradient-to-r from-blue-400 to-indigo-500 dark:from-blue-500 dark:to-indigo-600"
           initial={{ width: 0 }}
           animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
-      </motion.div>
-
+      </motion.div>{" "}
       {/* Toast Notifications */}
       <Toaster
         position="top-right"
         toastOptions={{
           duration: 4000,
           style: {
-            background: "#363636",
-            color: "#fff",
+            background: "#374151",
+            color: "#F9FAFB",
+            border: "1px solid #4B5563",
+            borderRadius: "12px",
+            fontSize: "14px",
+            fontWeight: "500",
+            boxShadow:
+              "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+          },
+          success: {
+            iconTheme: {
+              primary: "#10B981",
+              secondary: "#FFFFFF",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#EF4444",
+              secondary: "#FFFFFF",
+            },
           },
         }}
       />

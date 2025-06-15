@@ -2,30 +2,28 @@ export const agendaContent = {
   session1: {
     title: "🎯 Sesi 1: Pengenalan LinkedIn & Personal Branding",
     items: [
-      "Pentingnya LinkedIn untuk karir",
-      "Membangun citra diri profesional",
+      "Personal Branding di LinkedIn",
+      "Kesalahan umum di LinkedIn",
       "Optimasi profil LinkedIn",
-      "Strategi konten yang efektif",
     ],
   },
   session2: {
     title: "💼 Sesi 2: Sudut Pandang Professional",
     items: [
-      "Memanfaatkan LinkedIn untuk peluang karir",
+      "Strategi Freshgraduate: Bertarung di LinkedIn",
       "Tips dari profesional HR",
       "Soft skill yang dinilai recruiter",
-      "Attitude dan interaksi yang tepat",
     ],
   },
   session3: {
     title: "🔧 Sesi 3: Praktik Optimasi Profil LinkedIn",
     items: [
-      "Setup profil yang menarik recruiter",
-      "Teknik menulis headline yang powerful",
-      "Mengoptimalkan kata kunci untuk pencarian",
-      "Best practice foto profil profesional",
-      "Strategi untuk ditemukan headhunter",
-      "Tips networking dan engagement",
+      "Setup profil yang proper",
+      "Teknik menulis headline",
+      "Menulis about section yang menarik",
+      "Foto Profile yang profesional",
+      "Mengatur Education dan Experience",
+      "Job Hunting di LinkedIn",
     ],
   },
 };

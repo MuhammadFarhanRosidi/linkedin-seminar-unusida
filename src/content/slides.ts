@@ -1,43 +1,11 @@
 import { getSpeakerImage } from "./images";
-
-export interface SlideData {
-  id: string;
-  title: string;
-  subtitle?: string;
-  headTitle?: string;
-  subHeadTitle?: string;
-  type: string;
-}
-
-export interface TestimonialData {
-  name: string;
-  role: string;
-  company: string;
-  story: string;
-  benefit: string;
-  image?: string;
-}
-
-export interface QuizQuestion {
-  id: string;
-  question: string;
-  options: string[];
-  correctAnswer: number;
-  explanation: string;
-}
-
-export interface SpeakerInfo {
-  name: string;
-  title: string;
-  company: string;
-  image?: string;
-  socialMedia: {
-    linkedin?: string;
-    youtube?: string;
-    github?: string;
-    whatsapp?: string;
-  };
-}
+import {
+  SlideData,
+  QuizQuestion,
+  SpeakerInfo,
+  LinkedInBenefit,
+  FreshgraduateStrategy,
+} from "../types/slides";
 
 export const slides: SlideData[] = [
   {
@@ -48,34 +16,64 @@ export const slides: SlideData[] = [
     subHeadTitle: "Optimalkan LinkedIn untuk Masa Depan Kariermu",
     type: "cover",
   },
+  // {
+  //   id: "introduction",
+  //   title: "Selamat Datang di Era Digital Profesional",
+  //   subtitle: "Mengapa LinkedIn Menjadi Kunci Sukses Karir Anda",
+  //   type: "introduction",
+  // },
   {
     id: "agenda",
     title: "Agenda Pelatihan",
     type: "agenda",
   },
-  {
-    id: "importance",
-    title: "Mengapa LinkedIn Sangat Penting?",
-    type: "importance",
-  },
+  // {
+  //   id: "linkedin-statistics",
+  //   title: "Fakta Menarik tentang LinkedIn",
+  //   subtitle: "Data Terbaru yang Mengejutkan",
+  //   type: "linkedin-statistics",
+  // },
+  // {
+  //   id: "importance",
+  //   title: "Mengapa LinkedIn Sangat Penting?",
+  //   type: "importance",
+  // },
   {
     id: "personal-branding",
     title: "Personal Branding di LinkedIn",
     type: "personal-branding",
   },
   {
-    id: "profile-optimization",
-    title: "Optimasi Profil LinkedIn",
-    type: "profile-optimization",
+    id: "common-mistakes",
+    title: "Kesalahan Umum di LinkedIn",
+    subtitle: "Yang Wajib Dihindari",
+    type: "common-mistakes",
+  },
+  // {
+  //   id: "profile-optimization",
+  //   title: "Optimasi Profil LinkedIn",
+  //   type: "profile-optimization",
+  // },
+  {
+    id: "headline-masterclass",
+    title: "Masterclass: Membuat Headline yang Menarik",
+    subtitle: "Dari Biasa Menjadi Luar Biasa",
+    type: "headline-masterclass",
   },
   {
     id: "about-experience",
-    title: "About Section & Experience",
+    title: "Bagian Tentang & Pengalaman",
     type: "about-experience",
   },
   {
+    id: "photo-banner-tips",
+    title: "Tips Foto Profil & Banner yang Profesional",
+    subtitle: "First Impression yang Menawan",
+    type: "photo-banner-tips",
+  },
+  {
     id: "skills-networking",
-    title: "Skills & Networking Strategy",
+    title: "Keterampilan & Strategi Networking",
     type: "skills-networking",
   },
   {
@@ -83,90 +81,119 @@ export const slides: SlideData[] = [
     title: "Strategi Konten LinkedIn",
     type: "content-strategy",
   },
+  // {
+  //   id: "content-calendar",
+  //   title: "Kalender Konten LinkedIn",
+  //   subtitle: "Perencanaan Posting yang Efektif",
+  //   type: "content-calendar",
+  // },
+  // {
+  //   id: "engagement-hacks",
+  //   title: "Hack Engagement LinkedIn",
+  //   subtitle: "Meningkatkan Like, Comment & Share",
+  //   type: "engagement-hacks",
+  // },
   {
     id: "benefits",
     title: "Manfaat LinkedIn untuk Peluang Karir",
     type: "benefits",
   },
+  // {
+  //   id: "success-stories",
+  //   title: "Kisah Sukses LinkedIn Indonesia",
+  //   subtitle: "Inspirasi dari Para Profesional",
+  //   type: "success-stories",
+  // },
   {
     id: "freshgraduate-strategy",
     title: "Strategi Freshgraduate: Bertarung di LinkedIn",
     subtitle: "Dari Job Search sampai Headhunter Response",
     type: "freshgraduate-strategy",
   },
+  // {
+  //   id: "job-search-tips",
+  //   title: "Tips Pencarian Kerja di LinkedIn",
+  //   subtitle: "Strategi yang Terbukti Efektif",
+  //   type: "job-search-tips",
+  // },
   {
     id: "professional-perspective",
     title: "Sudut Pandang Professional HR & Recruiter",
     type: "professional-perspective",
   },
+  // {
+  //   id: "recruiter-insights",
+  //   title: "Wawasan dari Recruiter Top Indonesia",
+  //   subtitle: "Apa yang Mereka Cari di LinkedIn",
+  //   type: "recruiter-insights",
+  // },
   {
     id: "soft-skills",
     title: "Soft Skills yang Dinilai Recruiter",
     type: "soft-skills",
   },
-  {
-    id: "attitude-interaction",
-    title: "Attitude & Interaction yang Tepat",
-    type: "attitude-interaction",
-  },
+  // {
+  //   id: "linkedin-premium",
+  //   title: "LinkedIn Premium: Worth It or Not?",
+  //   subtitle: "Analisis Mendalam Fitur Premium",
+  //   type: "linkedin-premium",
+  // },
+  // {
+  //   id: "networking-masterclass",
+  //   title: "Masterclass Networking di LinkedIn",
+  //   subtitle: "Membangun Koneksi yang Bermakna",
+  //   type: "networking-masterclass",
+  // },
+  // {
+  //   id: "industry-insights",
+  //   title: "Insight per Industri",
+  //   subtitle: "Strategi LinkedIn untuk Berbagai Sektor",
+  //   type: "industry-insights",
+  // },
+  // {
+  //   id: "attitude-interaction",
+  //   title: "Sikap & Interaksi yang Tepat",
+  //   type: "attitude-interaction",
+  // },
+  // {
+  //   id: "linkedin-analytics",
+  //   title: "Memahami LinkedIn Analytics",
+  //   subtitle: "Mengukur Performa Profil Anda",
+  //   type: "linkedin-analytics",
+  // },
+  // {
+  //   id: "future-trends",
+  //   title: "Tren Masa Depan LinkedIn",
+  //   subtitle: "Persiapan untuk 2025-2030",
+  //   type: "future-trends",
+  // },
   {
     id: "action-plan",
-    title: "Action Plan & Next Steps",
+    title: "Rencana Aksi & Langkah Selanjutnya",
     type: "action-plan",
   },
+  // {
+  //   id: "tools-resources",
+  //   title: "Tools & Resources LinkedIn",
+  //   subtitle: "Kumpulan Alat untuk Optimasi",
+  //   type: "tools-resources",
+  // },
   {
     id: "quiz",
-    title: "Quiz: Test Your LinkedIn Knowledge",
+    title: "Kuis: Uji Pengetahuan LinkedIn Anda",
     type: "quiz",
   },
   {
     id: "thank-you",
-    title: "Terima Kasih & Stay Connected",
+    title: "Terima Kasih & Tetap Terhubung",
     type: "thank-you",
   },
 ];
 
-export interface LinkedInBenefit {
-  id: string;
-  title: string;
-  description: string;
-  percentage: string;
-  icon: string;
-  color: string;
-  stats: string;
-}
-
-export interface FreshgraduateStrategy {
-  profileOptimization: {
-    title: string;
-    tips: string[];
-  };
-  jobSearchStrategy: {
-    title: string;
-    steps: string[];
-  };
-  applicationTips: {
-    title: string;
-    items: string[];
-  };
-  headhunterResponse: {
-    title: string;
-    strategies: string[];
-  };
-  commonMistakes: {
-    title: string;
-    mistakes: string[];
-  };
-  successMetrics: {
-    title: string;
-    metrics: string[];
-  };
-}
-
 export const linkedInBenefits: LinkedInBenefit[] = [
   {
     id: "1",
-    title: "Hidden Job Market Access",
+    title: "Akses Pasar Kerja Tersembunyi",
     description:
       "Akses ke peluang kerja yang tidak dipublikasikan secara terbuka",
     percentage: "70%",
@@ -176,7 +203,7 @@ export const linkedInBenefits: LinkedInBenefit[] = [
   },
   {
     id: "2",
-    title: "Professional Visibility",
+    title: "Visibilitas Profesional",
     description:
       "Meningkatkan visibilitas profil kepada recruiter dan headhunter",
     percentage: "5x",
@@ -186,7 +213,7 @@ export const linkedInBenefits: LinkedInBenefit[] = [
   },
   {
     id: "3",
-    title: "Networking Opportunities",
+    title: "Peluang Networking",
     description: "Membangun koneksi dengan profesional di industri target",
     percentage: "3x",
     icon: "users",
@@ -195,7 +222,7 @@ export const linkedInBenefits: LinkedInBenefit[] = [
   },
   {
     id: "4",
-    title: "Career Growth",
+    title: "Pertumbuhan Karir",
     description: "Mempercepat pertumbuhan karir melalui personal branding",
     percentage: "40%",
     icon: "trending-up",
@@ -204,7 +231,7 @@ export const linkedInBenefits: LinkedInBenefit[] = [
   },
   {
     id: "5",
-    title: "Industry Insights",
+    title: "Wawasan Industri",
     description: "Mendapat informasi terkini tentang tren dan peluang industri",
     percentage: "85%",
     icon: "brain",
@@ -213,7 +240,7 @@ export const linkedInBenefits: LinkedInBenefit[] = [
   },
   {
     id: "6",
-    title: "Salary Negotiation",
+    title: "Negosiasi Gaji",
     description: "Leverage untuk negosiasi gaji yang lebih baik",
     percentage: "23%",
     icon: "dollar-sign",
@@ -226,7 +253,7 @@ export const freshgraduateStrategyContent: FreshgraduateStrategy = {
   profileOptimization: {
     title: "🎯 Optimasi Profil untuk Freshgraduate",
     tips: [
-      "Headline: 'Fresh Graduate | [Jurusan] | Ready to Learn & Contribute'",
+      "Headline: 'Posisi/Keahlian + Value Proposition + Personality/Passion'",
       "Summary: Ceritakan passion, achievement akademik, dan project experience",
       "Tambahkan volunteer work, internship, dan organizational experience",
       "Upload portfolio atau project showcase sebagai media attachment",
@@ -241,17 +268,15 @@ export const freshgraduateStrategyContent: FreshgraduateStrategy = {
       "Set job alerts dengan keywords spesifik (React Developer, Data Analyst, dll)",
       "Follow target companies dan aktifkan notification",
       "Join LinkedIn groups yang relevan dengan industri target",
-      "Gunakan fitur 'People Also Viewed' untuk networking",
     ],
   },
   applicationTips: {
     title: "📝 Application & Summary Job Tips",
     items: [
       "Baca job description dengan teliti dan match dengan skills",
-      "Customize cover letter untuk setiap aplikasi",
+      "Menyesuaikan cover letter dengan job position tiap perusahaan",
       "Highlight relevant coursework dan academic projects",
       "Mention specific achievements dengan angka (GPA, project results)",
-      "Show enthusiasm dan willingness to learn",
       "Include link ke portfolio, GitHub, atau project demo",
     ],
   },
@@ -260,14 +285,12 @@ export const freshgraduateStrategyContent: FreshgraduateStrategy = {
     strategies: [
       "Posting regular updates tentang learning progress",
       "Share insights dari course online atau webinar yang diikuti",
-      "Comment meaningfully di post industry leaders",
       "Showcase mini-projects atau technical achievements",
-      "Use hashtags yang trending di industri target",
-      "Respond quickly dan professionally ketika ada yang reach out",
+      "Merespon cepat ketika ada yang reach out",
     ],
   },
   commonMistakes: {
-    title: "❌ Common Mistakes to Avoid",
+    title: "❌ Kesalahan Umum yang Harus Dihindari",
     mistakes: [
       "Profil foto yang tidak profesional atau selfie casual",
       "Summary yang terlalu generic tanpa personality",
@@ -326,9 +349,9 @@ export const quizQuestions: QuizQuestion[] = [
     id: "q4",
     question: "Berapa maksimal karakter untuk LinkedIn About section?",
     options: ["1000", "1500", "2000", "2600"],
-    correctAnswer: 3,
+    correctAnswer: 2,
     explanation:
-      "LinkedIn About section memiliki batas maksimal 2600 karakter, gunakan dengan optimal untuk menceritakan story profesional Anda!",
+      "LinkedIn About section memiliki batas maksimal 2000 karakter, gunakan dengan optimal untuk menceritakan story profesional Anda!",
   },
   {
     id: "q5",
@@ -353,7 +376,7 @@ export const speakerInfo: SpeakerInfo = {
     // email: "your.email@domain.com", // Edit this
     youtube: "https://www.youtube.com/@MuhammadFarhanRosidi", // Edit this
     github: "https://github.com/MuhammadFarhanRosidi", // Edit this
-    whatsapp:
-      "https://api.whatsapp.com/send/?phone=6289512390006&text&type=phone_number&app_absent=0", // Edit this
+    // whatsapp:
+    //   "https://api.whatsapp.com/send/?phone=6289512390006&text&type=phone_number&app_absent=0", // Edit this
   },
 };
