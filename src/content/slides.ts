@@ -62,13 +62,13 @@ export const slides: SlideData[] = [
   },
   {
     id: "about-experience",
-    title: "Bagian Tentang & Pengalaman",
+    title: "About Section & Experience",
     type: "about-experience",
   },
   {
     id: "photo-banner-tips",
     title: "Tips Foto Profil & Banner yang Profesional",
-    subtitle: "First Impression yang Menawan",
+    subtitle: "First Impression yang menarik",
     type: "photo-banner-tips",
   },
   {
@@ -185,7 +185,7 @@ export const slides: SlideData[] = [
   },
   {
     id: "thank-you",
-    title: "Terima Kasih & Tetap Terhubung",
+    title: "Terima Kasih",
     type: "thank-you",
   },
 ];
@@ -241,7 +241,7 @@ export const linkedInBenefits: LinkedInBenefit[] = [
   {
     id: "6",
     title: "Negosiasi Gaji",
-    description: "Leverage untuk negosiasi gaji yang lebih baik",
+    description: "Negosiasi gaji yang lebih baik",
     percentage: "23%",
     icon: "dollar-sign",
     color: "emerald",
@@ -283,7 +283,7 @@ export const freshgraduateStrategyContent: FreshgraduateStrategy = {
   headhunterResponse: {
     title: "🎪 Menarik Perhatian Headhunter",
     strategies: [
-      "Posting regular updates tentang learning progress",
+      "Posting tentang learning progress",
       "Share insights dari course online atau webinar yang diikuti",
       "Showcase mini-projects atau technical achievements",
       "Merespon cepat ketika ada yang reach out",
@@ -292,7 +292,7 @@ export const freshgraduateStrategyContent: FreshgraduateStrategy = {
   commonMistakes: {
     title: "❌ Kesalahan Umum yang Harus Dihindari",
     mistakes: [
-      "Profil foto yang tidak profesional atau selfie casual",
+      "Profil foto yang tidak profesional atau selfie",
       "Summary yang terlalu generic tanpa personality",
       "Apply semua job tanpa baca requirements dengan teliti",
       "Tidak follow up setelah interview atau networking",

@@ -811,7 +811,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <FeatureCard
                 title={actionPlanContent.successMetrics.title}
                 icon={Target}
@@ -824,7 +824,7 @@ export default function Home() {
                 color="orange"
                 items={actionPlanContent.longTermGoals.items}
               />
-            </div>
+            </div> */}
           </motion.div>
         );
       case "benefits":
@@ -1030,7 +1030,7 @@ export default function Home() {
             className="space-y-8"
           >
             {/* Introduction Section */}{" "}
-            <motion.div
+            {/* <motion.div
               variants={itemVariants}
               className="bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900/30 dark:to-blue-900/30 p-8 rounded-xl text-center"
             >
@@ -1051,7 +1051,7 @@ export default function Home() {
                 Dari optimasi profil sampai mendapat respons headhunter - semua
                 strategi ada di sini!
               </motion.p>
-            </motion.div>
+            </motion.div> */}
             {/* Main Content Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <FeatureCard

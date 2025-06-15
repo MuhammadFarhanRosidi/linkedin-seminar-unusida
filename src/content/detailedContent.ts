@@ -7,7 +7,8 @@ export const profileOptimizationContent = {
       "Senyum natural dan mata menatap kamera",
       "Resolusi tinggi (400x400 pixel minimum)",
     ],
-  },  headline: {
+  },
+  headline: {
     title: "🎯 Judul Profil yang Menarik",
     items: [
       "Jangan hanya tulis jabatan pekerjaan",
@@ -26,7 +27,7 @@ export const profileOptimizationContent = {
 
 export const aboutExperienceContent = {
   aboutSection: {
-    title: "📖 Bagian Tentang yang Kuat",
+    title: "📖 About Section",
     items: [
       "Mulai dengan kalimat pembuka yang menarik",
       "Ceritakan kisah profesional Anda",
@@ -36,7 +37,7 @@ export const aboutExperienceContent = {
     ],
   },
   experienceSection: {
-    title: "💼 Bagian Pengalaman",
+    title: "💼 Experience Section",
     items: [
       "Fokus pada hasil, bukan tugas",
       "Gunakan kata kerja aktif yang kuat",
@@ -46,7 +47,7 @@ export const aboutExperienceContent = {
     ],
   },
   aboutTemplate: {
-    title: "🔍 Template Bagian Tentang",
+    title: "🔍 Template About Section",
     paragraphs: [
       "Paragraf 1: Pembuka + Peran Saat Ini",
       "Paragraf 2: Latar Belakang + Keahlian",
@@ -58,7 +59,7 @@ export const aboutExperienceContent = {
 
 export const skillsNetworkingContent = {
   skillsEndorsements: {
-    title: "⭐ Keterampilan & Dukungan",
+    title: "⭐ Keterampilan",
     items: [
       "Pilih 5-10 keterampilan yang paling relevan",
       "Minta dukungan dari kolega",
@@ -91,7 +92,6 @@ export const skillsNetworkingContent = {
       "80% pengguna mengakses via ponsel",
       "Pastikan profil ramah ponsel",
       "Tes tampilan di berbagai perangkat",
-      "Gunakan aplikasi LinkedIn untuk berjaringan",
     ],
   },
 };
@@ -103,8 +103,6 @@ export const contentStrategyContent = {
       "Wawasan Industri: Analisis tren industri",
       "Cerita Personal: Pembelajaran dan pengalaman",
       "Tips & Panduan: Berbagi pengetahuan praktis",
-      "Update Perusahaan: Pencapaian dan tonggak",
-      "Kepemimpinan Pemikiran: Opini dan prediksi",
     ],
   },
   postingSchedule: {
@@ -123,7 +121,7 @@ export const contentStrategyContent = {
       "Ajukan pertanyaan untuk mendorong diskusi",
       "Gunakan hashtag relevan (3-5 per pos)",
       "Tag orang yang relevan bila sesuai",
-      "Bagikan konten orang lain dengan wawasan Anda",
+      "Repost konten orang lain",
     ],
   },
   viralFormula: {
@@ -162,7 +160,7 @@ export const professionalPerspectiveContent = {
     ],
   },
   redFlags: {
-    title: "🚨 Tanda Bahaya untuk Perekrut",
+    title: "🚨 Red Flags untuk Perekrut",
     items: [
       "Profil tidak lengkap atau usang",
       "Foto tidak profesional",
@@ -198,7 +196,7 @@ export const softSkillsContent = {
       "Kesadaran Diri: Memahami kekuatan/kelemahan",
       "Empati: Respons terhadap orang lain",
       "Adaptabilitas: Fleksibilitas dalam perubahan",
-      "Membangun Hubungan: Keaslian jaringan",
+      "Membangun Hubungan",
     ],
   },
   leadershipPotential: {
@@ -206,7 +204,6 @@ export const softSkillsContent = {
     items: [
       "Inisiatif: Proaktif dalam peluang",
       "Pengaruh: Kemampuan menginspirasi orang lain",
-      "Akuntabilitas: Kepemilikan terhadap hasil",
       "Pola Pikir Berkembang: Sikap belajar berkelanjutan",
     ],
   },
@@ -226,7 +223,8 @@ export const attitudeInteractionContent = {
     },
     donts: {
       title: "❌ YANG JANGAN - Hal Yang Harus Dihindari",
-      items: [        "Overselling: Terlalu promosi",
+      items: [
+        "Overselling: Terlalu promosi",
         "Komentar Umum: 'Pos bagus!' tanpa substansi",
         "Topik Kontroversial: Politik, agama sensitif",
         "Pamer Tersembunyi: Promosi diri berlebihan",
@@ -235,7 +233,7 @@ export const attitudeInteractionContent = {
     },
   },
   redFlags: {
-    title: "🚨 Tanda Bahaya untuk Perekrut",
+    title: "🚨 Red Flags untuk Perekrut",
     content:
       "Profil Tidak Lengkap • Foto Tidak Profesional • Postingan Kontroversial • Cerita Karir Tidak Konsisten • Tidak Ada Aktivitas",
   },
@@ -251,8 +249,7 @@ export const actionPlanContent = {
     title: "📅 Minggu 1-2: Optimasi Profil",
     items: [
       "Perbarui foto profil profesional",
-      "Tulis ulang judul dengan proposisi nilai",
-      "Optimasi bagian Tentang",
+      "Optimasi bagian About Section",
       "Lengkapi semua bagian profil",
       "Tambahkan keterampilan relevan",
     ],
@@ -282,7 +279,6 @@ export const actionPlanContent = {
       "Membangun kepemimpinan pemikiran",
       "Membangun pengakuan industri",
       "Menarik peluang karir",
-      "Mengembangkan kemitraan strategis",
     ],
   },
   supportInfo: {

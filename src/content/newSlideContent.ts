@@ -94,8 +94,7 @@ export const commonMistakesContent = {
   },
   consequencesWarning: {
     title: "Konsekuensi Fatal",
-    content:
-      "Kesalahan-kesalahan ini bisa membuat Anda 'invisible' di mata recruiter dan mengurangi peluang karir hingga 60%. Waktu adalah aset berharga - jangan sia-siakan dengan kesalahan yang bisa dihindari.",
+    content: "Tidak mengatur invisibilitas profil LinkedIn (Visible)",
   },
 };
 
@@ -174,7 +173,7 @@ export const photoBannerContent = {
   psychologyTips: {
     title: "Psikologi Visual",
     content:
-      "Penelitian menunjukkan bahwa foto profil profesional meningkatkan kredibilitas hingga 85%. Orang membentuk first impression dalam 50 milidetik. Investasi foto profesional bisa meningkatkan response rate dari recruiter hingga 40%.",
+      "Penelitian menunjukkan bahwa foto profil profesional meningkatkan kredibilitas hingga 85%.",
   },
 };
 
