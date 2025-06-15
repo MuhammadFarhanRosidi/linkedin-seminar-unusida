@@ -2330,18 +2330,25 @@ export default function Home() {
           {" "}
           <div className="flex items-center space-x-4">
             <motion.div
-              className="bg-white dark:bg-gray-800 p-2 rounded-lg border dark:border-gray-700"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
+              className="bg-white dark:bg-white p-2 rounded-lg border dark:border-gray-700 overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             >
-              <Linkedin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <Image
+                src="/assets/logo.png"
+                alt="UNUSIDA Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8 object-contain"
+                priority
+              />
             </motion.div>{" "}
             <div>
               <h1 className="text-white font-bold text-lg">
-                Pelatihan LinkedIn
+                Workshop LinkedIn 2025
               </h1>
               <p className="text-blue-200 dark:text-gray-400 text-sm">
-                Program Pengembangan Profesional
+                BEM FILKOM UNUSIDA - Workshop LinkedIn 2025
               </p>
             </div>
           </div>{" "}
