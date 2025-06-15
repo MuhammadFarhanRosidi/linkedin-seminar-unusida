@@ -251,6 +251,7 @@ export const actionPlanContent = {
       "Perbarui foto profil profesional",
       "Optimasi bagian About Section",
       "Lengkapi semua bagian profil",
+      // "Tambahkan keterampilan relevan",
       "Tambahkan keterampilan relevan",
     ],
   },
